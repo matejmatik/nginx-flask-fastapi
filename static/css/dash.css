@@ -1,0 +1,74 @@
+.mantine-5v12bf {
+    font-family: var(--bs-body-font-family);
+    color-scheme: light;
+    font-size: 12px;
+    color: #333;
+}
+
+.gap-1,
+.gap-2,
+.gap-3 {
+    flex-wrap: nowrap !important;
+}
+
+.center-aligned-header .ag-header-cell-label {
+    justify-content: center;
+}
+
+
+.ag-theme-alpine.compact {
+    --ag-grid-size: 3px;
+}
+
+.ag-theme-alpine-dark .ag-header {
+    font-weight: normal !important;
+    font-size: 64% !important;
+}
+
+.nav-tabs .nav-link {
+    background-color: gray;
+    color: #fff;
+    font-size: 12px !important;
+}
+
+
+.mantine-TextInput-input,
+.mantine-zmh4e,
+.mantine-zunujd,
+.mantine-1y9bl4z,
+.mantine-1rhg0ql,
+.mantine-5v12bf,
+.mantine-ye2q1m,
+.mantine-jrzo75,
+.Select-menu-outer,
+.Select-value-label,
+.Select-control {
+    background-color: rgb(0, 0, 0) !important;
+}
+
+.mantine-TextInput-input,
+.mantine-zmh4e,
+.mantine-zunujd,
+.mantine-1y9bl4z,
+.mantine-1rhg0ql,
+.mantine-ye2q1m,
+.mantine-jrzo75,
+.mantine-4kwz18,
+.mantine-9xpqaw,
+.mantine-5v12bf,
+.Select-menu-outer,
+.Select-value-label,
+.Select-control,
+.mantine-Switch-label,
+.mantine-TextInput-label {
+    color: white !important;
+    font-size: 12px !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.mantine-4kwz18:hover,
+.mantine-9xpqaw:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+
+}

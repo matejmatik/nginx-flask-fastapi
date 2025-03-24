@@ -1,0 +1,25 @@
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+        <span class="offcanvas-title lead" id="offcanvasNavbarLabel">Seznam aplikacij</span>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item my-2">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 d-flex align-items-center">
+                    <i class="bi bi-house-door h5"></i><span class="ms-2 lead meni"><a href="#">Domov</a></span>
+                </button>
+            </li>
+            <li class="nav-item my-2"> 
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#pregled-be" aria-expanded="true">
+                    <i class="bi bi-speedometer2 h5"></i><span class="mx-2 lead meni">Pregled</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="pregled-be">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                        <li class="my-1"><a class="seznam_app" href="{{ url_for('default_dash_app') }}">Privzeta template aplikacija</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

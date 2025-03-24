@@ -1,0 +1,36 @@
+{% from "shared/macros/format_price.jinja2" import format_price %}
+{% from "shared/macros/form_field.jinja2" import form_field %}
+<!DOCTYPE html>
+<html data-bs-theme="dark">
+<head>
+    {% block meta %}
+        <meta charset="UTF-8">
+        <meta name="description" content="BISOL Energija, Kilowatt Kate Insight">
+        <meta name="keywords" content="Kilowatt Kate Insight">
+        <meta name="author" content="Matej Mencin">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock %}
+    {% block styles %}
+        {{ render_partial('partials/css/imports.jinja2') }}
+    {% endblock %}
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    {{ render_partial('partials/theme_switcher.jinja2') }}
+    {{ render_partial('partials/header.jinja2') }}
+    <div id="be-alerts">{{ render_partial('partials/alerts.jinja2') }}</div>
+    {{ render_partial('partials/footer.jinja2', version=version) }}
+    <main role="main" class="app_content pt-3 h-100">
+        {% block app_content %}
+        <!-- Content -->
+        {% endblock %}
+    </main>
+    {{ render_partial('partials/offcanvas.jinja2') }}
+</body>
+    {% block scripts %}
+        {{ render_partial('partials/js/imports.jinja2') }}
+        {{ render_partial('partials/js/dark_light_mode_switch.jinja2') }}
+    {% endblock %}
+    {% block extrajs %}
+    {% endblock %}
+</html>

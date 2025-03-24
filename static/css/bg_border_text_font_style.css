@@ -1,0 +1,100 @@
+.meni:hover {
+    color: #F15A22 !important;
+}
+
+.seznam_app {
+
+    font-size: 14px !important;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+.seznam_app:hover {
+    color: #F15A22 !important;
+}
+
+.card {
+    /* border-color: #f1592283 !important; */
+    border-radius: 0.5em !important;
+}
+
+.my-box-shadow {
+    box-shadow: 0px 1px 2px #f1592261, 0px 2px 4px #f1592261, 0px 4px 8px #f1592261, 0px 8px 16px #f1592261;
+}
+
+
+.border-luka {
+    border: 2px solid #3434eb !important
+}
+
+.text-bg-luka {
+    color: #fff;
+    background-color: #3434eb;
+}
+
+.text-bg-lakers {
+    color: #FDB927;
+    background-color: #552583;
+}
+
+.bisol {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.text-transparent {
+    color: transparent !important;
+}
+
+.bisol-color {
+    color: #F15A22 !important;
+}
+
+.background-bisol-color {
+    background-color: #F15A22 !important;
+}
+
+
+.small-fonts {
+    font-size: 0.8em !important;
+}
+
+.extra-small-font {
+    font-size: 0.65em !important;
+}
+
+.badge {
+    width: 100% !important;
+}
+
+.be-small-badge-width {
+    width: 5rem !important;
+}
+
+.be-badge-width {
+    width: 10rem !important;
+}
+
+.desno {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.bg-dgrey {
+    background-color: #212529 !important;
+}
+
+.font-dgrey {
+    font: #212529 !important;
+}

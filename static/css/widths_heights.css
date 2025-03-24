@@ -1,0 +1,43 @@
+/* Special widths not covered by bootstrap */
+.set-width-auto {
+    width: auto !important;
+    padding: 0.5em !important;
+}
+
+
+/* Widths */
+.col-0-25 {
+    width: 2.08%;
+}
+
+.col-0-5 {
+    width: 4.165%;
+}
+
+.col-0-75 {
+    width: 6.24%;
+}
+
+.col-1-25 {
+    width: 10.4125%;
+}
+
+.col-1-5 {
+    width: 12.495%;
+}
+
+.col-2-5 {
+    width: 20.825%;
+}
+
+.col-3-5 {
+    width: 29.165%;
+}
+
+
+/* Heights */
+.height-45vh {
+    height: 45vh !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

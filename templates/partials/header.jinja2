@@ -1,0 +1,25 @@
+<header class="navbar navbar-expand-md border-bottom border-1 border-secondary p-3 my-box-shadow" data-bs-theme="dark">
+    <div class="container d-flex justify-content-center align-items-center w-100">
+        <div class="col w-25">
+        <button 
+            class="btn" 
+            type="button" 
+            title="Meni aplikacije" 
+            data-bs-toggle="offcanvas" 
+            data-bs-target="#offcanvasNavbar" 
+            aria-controls="offcanvasNavbar" 
+            data-bs-theme="dark"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        </div>
+        <div class="col w-50">
+            <a class="navbar-brand d-flex align-items-center justify-content-center"href="{{ url_for('api.home_views.index') }}">
+                <img id="logo" src="{{ url_for('static', filename='img/BE_logo_dark.svg') }}" width="auto" height="50" style="padding: 0"  alt="BISOL logo">
+            </a>
+        </div>
+        <div class="col w-25 d-flex justify-content-end dropdown">
+
+        </div>
+    </div>
+</header>

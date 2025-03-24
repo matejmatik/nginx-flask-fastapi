@@ -1,0 +1,27 @@
+label {
+    font-size: 80% !important;
+}
+
+.becheckbox-margin {
+    padding-top: 1.5em;
+}
+
+#mtmm-wrapper>div.row:nth-of-type(even) {
+    background-color: #2C3034 !important;
+    /* border-color: #f1592283 !important; */
+    border-radius: 0.5em !important;
+}
+
+#mtmm-wrapper>div.row:nth-of-type(odd) {
+    background-color: #212529 !important;
+    /* border-color: #f1592283 !important; */
+    border-radius: 0.5em !important;
+}
+
+.disable-form-check-input {
+    visibility: hidden !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }

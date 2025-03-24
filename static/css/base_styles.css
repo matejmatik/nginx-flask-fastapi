@@ -1,0 +1,96 @@
+html,
+body {
+    height: 100%;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header,
+nav {
+    flex: 0;
+    order: 0;
+}
+
+main {
+    flex: 1;
+    order: 1;
+}
+
+footer {
+    flex: 0;
+    order: 2;
+}
+
+/* Dash integration css */
+
+#app-content>div {
+    height: 100%
+}
+
+#_pages_content {
+    height: 100%;
+}
+
+
+
+/* Other styles */
+a,
+ul,
+li {
+    text-decoration: none !important;
+    list-style: none !important;
+}
+
+.is-hidden {
+    display: none;
+}
+
+/* Used at invoices */
+@media (min-width: 768px) {
+    .sticky_me {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        margin-top: 10px;
+    }
+}
+
+.button_invoices {
+    padding: 0 !important;
+    margin-right: 1em !important;
+    font-size: 120% !important;
+}
+
+/* Console and file manager */
+.hyperlink_file {
+    color: #ccc !important;
+    font-weight: 500 !important;
+    font-size: 110% !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.console {
+    height: 50vh;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #f8f9fa;
+    font-family: monospace;
+    font-size: small
+}
+
+.alert {
+    margin-bottom: 0 !important;
+    padding: 0.5em !important;
+    border-radius: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

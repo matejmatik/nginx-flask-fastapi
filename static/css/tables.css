@@ -1,0 +1,92 @@
+/* NEW -- CSS FOR DATATABLES SEARCH */
+/* -------------------------------- */
+.w-be {
+    width: 6.25% !important;
+}
+
+th,
+td {
+    vertical-align: middle;
+}
+
+.table {
+    font-size: 95% !important;
+    width: 100% !important;
+}
+
+.dt-container thead {
+    font-size: 1.1em !important;
+}
+
+.dt-container tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+    font-size: 1.0em;
+}
+
+.dt-container tfoot select {
+    width: 100%;
+    box-sizing: border-box !important;
+    font-size: 1.0em;
+}
+
+.select2-container--default .select2-selection--multiple {
+    min-height: 27.08px !important;
+}
+
+.select2-container .select2-selection--multiple {
+    min-height: unset !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin: 0 !important;
+    margin-left: 1.5px !important;
+    margin-top: 1.5px !important;
+    color: #000 !important;
+}
+
+.select2-selection {
+    background-color: #3b3b3b !important;
+    padding: 3px !important;
+    border-width: 2px;
+    font-size: 1.0em !important;
+}
+
+.select2-search__field {
+    margin: 0 !important;
+    padding: 0 !important;
+
+}
+
+.select2-results__option {
+    color: #fff !important;
+    background-color: #3b3b3b !important;
+}
+
+.select2-results__option:hover {
+    color: #fff !important;
+    background-color: #000000 !important;
+}
+
+
+
+.dt-search {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+}
+
+.dt-info {
+    margin-right: 1em !important;
+}
+
+#dt-search-0,
+#dt-search-1,
+#dt-search-2,
+#dt-search-3 {
+    margin: 0 0.5em !important;
+    padding: 0.5em !important;
+    width: 300px !important;
+    font-size: 1.1em !important;
+}

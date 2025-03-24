@@ -1,0 +1,15 @@
+{%- macro format_date_ymd(dtc, with_time=false, spliter=' ') -%}
+    {%- set dtc = dtc|string -%}
+    {%- set dtc = dtc.split(spliter) -%}
+    {%- set date = dtc[0] -%}
+    {%- set time = dtc[-1] -%}
+    {%- set date = date.split('-') -%}
+    {%- set time = time.split(':') -%}
+    {%- if with_time -%}
+        {{ date[2] }}.{{ date[1] }}.{{ date[0] }} {{ time[0] }}:{{ time[1] }}
+    {%- else -%}
+        {{ date[2] }}.{{ date[1] }}.{{ date[0] }}
+    {%- endif -%}
+
+{%- endmacro -%}
+

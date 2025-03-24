@@ -1,0 +1,33 @@
+{% extends 'core/base.jinja2' %}
+{% block title %} {{ title }} {% endblock %}
+{% block meta %}
+    {{ super() }}
+    {{ metas }}
+{% endblock %}
+{% block styles %}
+    {{ super() }}
+    {{ css }}
+    <link 
+        rel="stylesheet"   
+        href="{{ url_for('static', filename='css/dash.css') }}"
+    />
+    <style>
+    .app_content > #react-entry-point {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    </style>
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+{% endblock %}
+{% block app_content %}
+    {{ app_entry }}
+{% endblock %}
+{% block extrajs %}
+    {{ super() }}
+    {{ dash_config }}
+    {{ scripts }}
+    {{ renderer }}
+{% endblock %}

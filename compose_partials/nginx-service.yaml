@@ -1,0 +1,17 @@
+services:
+  nginx:
+    build: ../nginx
+    container_name: ${STACK_NAME}-nginx
+    image: ${STACK_NAME}-nginx:${PROJECT_VERSION}
+    env_file:
+      - ../.env
+    restart: always
+    volumes:
+      - ../nginx/default.conf:/tmp/default.conf
+    environment: 
+      - FLASK_APP_ADDRESS=${FLASK_APP_NAME}
+      - FLASK_APP_PORT=3000
+    ports:
+      - "80:80"
+    depends_on:
+      - flask-dash

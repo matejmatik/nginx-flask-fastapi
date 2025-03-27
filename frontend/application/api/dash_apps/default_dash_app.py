@@ -2,11 +2,20 @@ from datetime import datetime  # noqa
 from logging import getLogger  # noqa
 from os import getcwd as os_getcwd, path as os_path  # noqa
 
-from dash import Output, Input  # noqa
+from dash import Output, Input, Patch, State 
+from dash_extensions import EventListener
+from plotly.io import templates as plotly_templates  # noqa
 
 from ...connections import kk_client, hedge_client  # noqa
 from ...core import FlaskConfiguration
 from ...utils import CustomDash, format_dash_id  # noqa
+
+from dash.dcc import Interval, Store, Graph
+from dash.html import P
+from plotly.graph_objs import Figure
+
+from .be_dash_components import BeHiddenDashThemeSwitch, BeGraph, BeStore, BeInterval
+from .elements import BeLoading, BeContainer, BeRow, BeCol
 
 
 # -----------------------------------------------------------------------------
@@ -48,25 +57,16 @@ def initialize_dash_app(
 # -----------------------------------------------------------------------------
 
 
-def create_dashboard_layout(app_id: str) -> object:
-    from dash.dcc import Interval, Store
-    from dash.html import P
-    from .elements import BeLoading, BeContainer, BeRow, BeCol
+def create_dashboard_layout(app_id: str) -> BeContainer:
+    """
+    create_dashboard_layout Creates the layout for the dashboard.
 
-    INTERVAL_LONG = 60 * 10 * 1000  # Every 10 minutes
-
+    """
+    
     return BeContainer(
         children=[
-            Interval(id=f"{app_id}-interval", interval=INTERVAL_LONG, n_intervals=0),
-            BeLoading(
-                children=[
-                    Store(
-                        id=f"{app_id}-ag-grid-store",
-                        storage_type="session",
-                    ),
-                ],
-                fullscreen=True,
-            ),
+            BeInterval(_id=f"{app_id}-app-refresh", interval_in_seconds=600),
+            BeHiddenDashThemeSwitch(_id=f"{app_id}-color-mode-switch"),
             # Main title
             BeRow(
                 [
@@ -80,6 +80,11 @@ def create_dashboard_layout(app_id: str) -> object:
                                 "To je osnovna Dash aplikacija.",
                                 className="h6 p3",
                             ),
+                            BeGraph(
+                                _id=f"{app_id}-graph",
+                                with_loading=True,
+                                loading_in_fullscreen=False,
+                            ),                            
                         ],
                         width=12,
                     ),
@@ -98,30 +103,54 @@ def create_dashboard_layout(app_id: str) -> object:
 
 
 def configure_dash_event_handlers(dash_app: object, app_id: str) -> None:
+    """
+    Configure the dash app event handlers.
+    """
+    
+    
+    dash_app.clientside_callback(
+        """
+        function() {
+            const storedTheme = localStorage.getItem('theme');
+            if (storedTheme === 'dark') {
+                return true;
+            }
+            else if (storedTheme === 'auto') {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                return false;
+            }
+        }
+        """,
+        Output(f"{app_id}-color-mode-switch", 'value'),
+        Input(f"{app_id}-app-refresh", 'n_intervals'),
+    )
+            
+    
     dash_app.callback(
-        Output(f"{app_id}-ag-grid-store", "data"),
-        Input(f"{app_id}-interval", "n_intervals"),
-    )(callback_init_data)
+        Output(f"{app_id}-graph", "figure"),
+        Input(f"{app_id}-color-mode-switch", "value"),
+        prevent_initial_call=True,
+    )(callback_update_figure_template)
 
 
 # -----------------------------------------------------------------------------
 # Callbacks functions
 # -----------------------------------------------------------------------------
 
-"""
-# How to use client
 
-from application.connections.clients import kk_client, hedge_client
 
-kk_client.get("/info/ping")
-hedge_client.get("/info/ping")
+def callback_update_figure_template(switch_on: bool) -> BeGraph:
 
-# And parse the response
-"""
+    template = plotly_templates["plotly_dark"] if switch_on else plotly_templates["plotly"]
+
+    patched_figure = Patch()
+    patched_figure["layout"]["template"] = template
+    return patched_figure
 
 
 def callback_init_data(n_intervals: int) -> dict:
     if n_intervals > 0:
         return {}
-
     return {}
+

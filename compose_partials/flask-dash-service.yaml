@@ -1,0 +1,23 @@
+services:
+  flask-dash:
+    build: ../frontend
+    container_name: ${STACK_NAME}-${FLASK_APP_IMAGE}
+    image: ${STACK_NAME}-${FLASK_APP_IMAGE}:${PROJECT_VERSION}
+    env_file:
+      - ../.env
+    environment:
+      - APP_NAME=${FLASK_APP_NAME}
+      - ENVIRONMENT=production
+      - TIMEZONE=${TIMEZONE?Variable not set}
+      - PROJECT_NAME=${PROJECT_NAME?Variable not set}
+      - PROJECT_VERSION=${PROJECT_VERSION?0.0.0}
+      - FLASK_APP_PORT=${FLASK_APP_PORT}
+      - STATIC_FOLDER=${STATIC_FOLDER?static}
+      - TEMPLATE_FOLDER=${TEMPLATE_FOLDER?templates}
+      - WTF_CSRF_ENABLED=${WTF_CSRF_ENABLED?Variable not set}
+      - RECAPTCHA_PUBLIC_KEY=${RECAPTCHA_PUBLIC_KEY?Variable not set}
+      - RECAPTCHA_PRIVATE_KEY=${RECAPTCHA_PRIVATE_KEY?Variable not set}
+    restart: always
+    volumes:
+      - ../static:/project/application/static:ro
+      - ../templates:/project/application/templates:ro

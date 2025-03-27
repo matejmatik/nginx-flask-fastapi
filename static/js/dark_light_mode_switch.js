@@ -28,10 +28,30 @@
 
         // Update the logo based on the theme
         const logo = document.querySelector("#logo");
+        const switchElement = document.querySelector('#color-mode-switch');
         if (theme === 'dark') {
-            logo.src = "static/img/BE_logo_dark.svg";  // Dark logo
+            logo.src = "../static/img/BE_logo_dark.svg";  // Dark logo
+            if (switchElement) {
+                switchElement.checked = true;
+            };
+        }
+        else if (theme === 'auto') {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                logo.src = "../static/img/BE_logo_dark.svg";  // Dark logo
+                if (switchElement) {
+                    switchElement.checked = true;
+                };
+            } else {
+                logo.src = "../static/img/BE_logo_light.svg"; // Light logo
+                if (switchElement) {
+                    switchElement.checked = false;
+                };
+            }
         } else {
-            logo.src = "static/img/BE_logo_light.svg"; // Light logo
+            logo.src = "../static/img/BE_logo_light.svg"; // Light logo
+            if (switchElement) {
+                switchElement.checked = false;
+            };
         }
     }
     
@@ -74,7 +94,15 @@
     
     window.addEventListener('DOMContentLoaded', () => {
         showActiveTheme(getPreferredTheme())
-    
+        const currentTheme = getPreferredTheme();
+        const switchElement = document.querySelector('#color-mode-switch');
+        if (currentTheme === 'dark' && switchElement) {
+            switchElement.checked = true;
+        }
+        else if (switchElement) {
+            switchElement.checked = false;
+        }
+
         document.querySelectorAll('[data-bs-theme-value]')
         .forEach(toggle => {
             toggle.addEventListener('click', () => {
@@ -86,3 +114,4 @@
         })
     })
     })();
+

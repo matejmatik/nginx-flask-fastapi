@@ -1,0 +1,9 @@
+services:
+  redis:
+    container_name: ${STACK_NAME}-${REDIS_IMAGE}
+    image: redis:8.0-M02-alpine
+    env_file:
+      - ../.env
+    restart: always
+    volumes: 
+      - redis-data:/data

@@ -1,0 +1,19 @@
+services:
+  backend:
+    build: ../backend
+    container_name: ${STACK_NAME}-${BACKEND_IMAGE}
+    image: ${STACK_NAME}-${BACKEND_IMAGE}:${PROJECT_VERSION}
+    env_file:
+      - ../.env
+    environment:
+      - APP_NAME=${BACKEND_NAME}
+      - ENVIRONMENT=production
+      - TIMEZONE=${TIMEZONE?Variable not set}
+      - PROJECT_NAME=${PROJECT_NAME?Variable not set}
+      - PROJECT_VERSION=${PROJECT_VERSION?0.0.0}
+      - PROJECT_DESCRIPTION=${DESCRIPTION?Variable not set}
+      - BACKEND_NAME=${BACKEND_NAME}
+      - BACKEND_PORT=${BACKEND_PORT}
+    ports:
+      - "${BACKEND_PORT}:3000"
+    restart: always

@@ -44,10 +44,11 @@ ul,
 li {
     text-decoration: none !important;
     list-style: none !important;
+    color: var(--bs-dark-text-emphasis)!important;
 }
 
 .is-hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Used at invoices */

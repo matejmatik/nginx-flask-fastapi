@@ -1,6 +1,9 @@
 from logging import getLogger
 
-from .sync_api_client import ApiClientDependency, SyncAPIClient
+from flask import Flask, current_app
+
+from ..core import FlaskConfiguration
+from .sync_api_client import SyncAPIClient
 
 
 logger = getLogger(__name__)
@@ -11,7 +14,7 @@ logger = getLogger(__name__)
 # Later on will be used as dependcy injection, which will be implemented in the future.
 
 
-def initialize_api_clients() -> None:
+def initialize_client_connections(app: Flask) -> None:
     """
     initialize_api_clients function initializes the API clients.
 
@@ -24,30 +27,39 @@ def initialize_api_clients() -> None:
         _type_: tuple(kk_client, hedge_client)
     """
 
-    # KK API client
-    kk_dependency: ApiClientDependency = ApiClientDependency(
-        hostname="http://10.114.0.4:8702",
+    logger.info("Initializing API clients")
+
+    app.config["KK_API_CLIENT"] = SyncAPIClient(
+        hostname=FlaskConfiguration.MYSELF_API_ENDPOINT,
     )
-    kk_client: SyncAPIClient = kk_dependency()
-
-    try:
-        logger.info(kk_client.get("/info/ping"))
-    except Exception as e:
-        raise e
-
-    # Hedge API client
-    hedge_dependency: ApiClientDependency = ApiClientDependency(
-        hostname="http://10.114.0.3/hedg_pos_fix_prices_api/v1/",
+    app.config["HEDGE_API_CLIENT"] = SyncAPIClient(
+        hostname=FlaskConfiguration.HEDGE_POS_API_ENDPOINT
     )
-    hedge_client: SyncAPIClient = hedge_dependency()
 
-    try:
-        logger.info(hedge_client.get("/info/ping"))
-    except Exception as e:
-        raise e
-
-    return kk_client, hedge_client
+    logger.info("API clients initialized")
 
 
-# kk_client, hedge_client = initialize_api_clients()
-kk_client, hedge_client = None, None
+def disconnect_api_clients(exception: Exception) -> None:
+    """
+    close_api_clients function closes the API clients.
+
+    _extended_summary_
+
+    Raises:
+        e: kk_client and hedge_client closing failed
+
+    Returns:
+        None
+    """
+
+    logger.info("Closing API clients")
+
+    kk_client = current_app.config.get("KK_API_CLIENT")
+    hedge_client = current_app.config.get("HEDGE_API_CLIENT")
+
+    if kk_client:
+        kk_client.close()
+    if hedge_client:
+        hedge_client.close()
+
+    logger.info("API clients closed")

@@ -17,3 +17,6 @@ class FlaskConfiguration:
 
     RECAPTCHA_PUBLIC_KEY = getenv("RECAPTCHA_PUBLIC_KEY")
     RECAPTCHA_PRIVATE_KEY = getenv("RECAPTCHA_PRIVATE_KEY")
+
+    MYSELF_API_ENDPOINT = "http://10.114.0.4:8702"
+    HEDGE_POS_API_ENDPOINT = "http://10.114.0.3/hedg_pos_fix_prices_api/v1"

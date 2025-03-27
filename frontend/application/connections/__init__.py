@@ -1,3 +1,3 @@
-from .clients import kk_client, hedge_client
+from .clients import initialize_client_connections, disconnect_api_clients
 
-__all__ = ["kk_client", "hedge_client"]
+__all__ = ["initialize_client_connections", "disconnect_api_clients"]

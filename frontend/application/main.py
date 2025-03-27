@@ -2,6 +2,7 @@ from flask import Flask
 from jinja_partials import register_extensions as jinja_partials_register_extensions
 
 from .api import api_blueprints, register_api_error_handlers, register_dash_blueprints
+from .connections import initialize_client_connections, disconnect_api_clients
 from .core import FlaskConfiguration
 from .utils import CustomRequest
 
@@ -18,6 +19,7 @@ def initialize_flask_application() -> Flask:
     with app.app_context():
         app.config.from_object(FlaskConfiguration)
         jinja_partials_register_extensions(app)
+        initialize_client_connections(app)
         register_dash_blueprints(app)
         app.register_blueprint(api_blueprints, url_prefix="/")
         __setup_flask_extensions(app)
@@ -33,3 +35,7 @@ def initialize_flask_application() -> Flask:
 
 app = initialize_flask_application()
 app.request_class = CustomRequest
+
+@app.teardown_appcontext
+def __disconnect_api_clients(exception: Exception) -> None:
+    disconnect_api_clients(exception)

@@ -6,7 +6,7 @@ logger = getLogger(__name__)
 
 
 class SyncAPIClient:
-    __slots__ = ("hostname", "__auth", "__headers", "__client")
+    __slots__ = ("hostname", "__auth", "__headers", "session")
 
     def __init__(
         self,
@@ -25,14 +25,14 @@ class SyncAPIClient:
         self.hostname = hostname
         self.__auth = (username, password) if username and password else None
         self.__headers = {"accept": "application/json"}
-        self.__client = requests.Session()
-        self.__client.auth = self.__auth
-        self.__client.headers.update(self.__headers)
-        self.__client.timeout = timeout
+        self.session = requests.Session()
+        self.session.auth = self.__auth
+        self.session.headers.update(self.__headers)
+        self.session.timeout = timeout
 
     def set_headers(self, headers: dict):
         self.__headers.update(headers)
-        self.__client.headers.update(headers)
+        self.session.headers.update(headers)
 
     def _request(
         self,
@@ -49,7 +49,7 @@ class SyncAPIClient:
 
         for attempt in range(retries):
             try:
-                response = self.__client.request(method, url, params=params, json=data)
+                response = self.session.request(method, url, params=params, json=data)
                 response.raise_for_status()
                 return response.json()
             except (requests.RequestException, requests.HTTPError) as exc:
@@ -84,26 +84,4 @@ class SyncAPIClient:
         return self._request("PUT", tag, params=params, data=data, retries=retries)
 
     def close(self):
-        self.__client.close()
-
-
-class ApiClientDependency:
-    def __init__(
-        self,
-        hostname: str,
-        username: str = None,
-        password: str = None,
-    ):
-        self.client = None
-        self.hostname = hostname
-        self.username = username
-        self.password = password
-
-    def init(self):
-        if self.client is None:
-            self.client = SyncAPIClient(self.hostname, self.username, self.password)
-
-    def __call__(self) -> SyncAPIClient:
-        if not self.client:
-            self.init()
-        return self.client
+        self.session.close()

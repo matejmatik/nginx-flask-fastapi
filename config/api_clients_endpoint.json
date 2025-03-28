@@ -1,0 +1,34 @@
+[
+    {
+        "hostname": "http://10.114.0.4:8702",
+        "name": "KK_API_CLIENT"
+    },
+    {
+        "hostname": "http://backend:3000",
+        "name": "INTERNAL_BACKEND_API_CLIENT"
+    },
+    {
+        "hostname": "http://10.114.0.3/hedg_pos_fix_prices_api/v1",
+        "name": "HEDGE_API_CLIENT"
+    },
+	{
+		"hostname": "http://10.114.0.3/prilogaa_api/v1",
+		"name": "PRILOGAA_API"
+	},
+	{
+		"hostname": "http://10.114.0.3/invoice_api/v1",
+		"name": "INVOICE_API"
+	},
+	{
+		"hostname": "http://10.114.0.3/edc_lifecycle_assistant/v1",
+		"name": "EDC_LIFECYCLE_API"
+	},
+	{
+		"hostname": "http://10.114.0.3/edc_api/v1",
+		"name": "EDC_API"
+	},
+	{
+		"hostname": "http://10.114.0.3/bemetric_cacheapi/v1",
+		"name": "METERING_DATA_CACHE_API"
+	}
+]

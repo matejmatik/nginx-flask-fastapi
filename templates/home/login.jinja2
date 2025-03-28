@@ -1,0 +1,9 @@
+{% extends "core/base.jinja2" %} 
+{% block title %} KK - Prijava v sistem {% endblock %}
+{% block app_content %}
+<div class="container main-container">
+<div class="d-flex m-auto align-items-center justify-content-center p-5">
+    {{ render_partial('shared/forms/login_form.jinja2', form=form) }}
+</div>
+</div>
+{% endblock %}

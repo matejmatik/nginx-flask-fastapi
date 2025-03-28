@@ -1,0 +1,79 @@
+
+<div class="modal fade" id="BESearch" tabindex="-1" aria-labelledby="Test" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="BESearchLabel">BISOL Energija iskalnik</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="BESearchContent">
+                <form 
+                    id="global-search-form" 
+                    hx-post="{{ url_for('api.home_views.search') }}" 
+                    hx-target="#global-search-results"
+                    hx-trigger="submit"
+                    >
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <select class="form-select" aria-label="Default select example" id="g_search_category" name="g_search_category">
+                                <option value="all">Vse</option>
+                                <option value="contracts">Pogodbe</option>
+                                <option value="invoice">Računi</option>
+                                <option value="counterparties">Stranke</option>
+                                <option value="gsrnmt">Merilna točka</option>
+                            </select>
+                        </div>
+                        <div class="col-9">
+                            <div class="input-group">
+                                <input 
+                                    type="search" 
+                                    class="form-control" 
+                                    id="g_search_string" 
+                                    name="g_search_string" 
+                                    placeholder="Vnesi iskalni niz ..."
+                                    autocomplete="off"
+                                >
+                                <button class="btn btn-outline-secondary" type="submit" id="g_search_button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-3" id="global-search-results">
+                    <!-- Rezulati iskanje -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zapri</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener('keydown', function(event) {
+        if (event.altKey && event.shiftKey && event.key === 'F') {
+            // Prevent default action to avoid any other unintended behavior
+            event.preventDefault();
+            const modalElement = document.getElementById('BESearch');
+            const myModal = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            const searchInput = document.getElementById('g_search_string');
+
+            if (modalElement.classList.contains('show')) {
+                myModal.hide();
+            } else {
+                myModal.show();
+                modalElement.addEventListener('shown.bs.modal', function () {
+                    searchInput.focus();
+                });
+            }
+        }
+    });
+
+    // if the modal is closed, clear the search input
+    document.getElementById('BESearch').addEventListener('hidden.bs.modal', function (event) {
+        document.getElementById('g_search_string').value = '';
+        document.getElementById('global-search-results').innerHTML = '';
+        document.getElementById('g_search_category').value = 'all';
+    });
+</script>

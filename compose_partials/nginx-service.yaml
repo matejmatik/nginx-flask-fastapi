@@ -10,7 +10,7 @@ services:
       - ../nginx/default.conf:/tmp/default.conf
     environment: 
       - FLASK_APP_ADDRESS=${FLASK_APP_NAME}
-      - FLASK_APP_PORT=3000
+      - FLASK_APP_PORT=8080
     ports:
       - "80:80"
     depends_on:

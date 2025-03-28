@@ -26,6 +26,8 @@
         document.documentElement.setAttribute('data-bs-theme', theme)
         }
 
+        
+
         // Update the logo based on the theme
         const logo = document.querySelector("#logo");
         const switchElement = document.querySelector('#color-mode-switch');
@@ -53,6 +55,7 @@
                 switchElement.checked = false;
             };
         }
+
     }
     
     setTheme(getPreferredTheme())

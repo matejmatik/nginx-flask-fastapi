@@ -1,5 +1,5 @@
 {% from "shared/macros/format_price.jinja2" import format_price %}
-{% from "shared/macros/form_field.jinja2" import form_field %}
+{% from "shared/macros/form_field.jinja2" import form_field %} <!-- Might be deprecated -->
 <!DOCTYPE html>
 <html data-bs-theme="dark">
 <head>
@@ -26,6 +26,7 @@
         {% endblock %}
     </main>
     {{ render_partial('partials/offcanvas.jinja2') }}
+    {{ render_partial('partials/bisol_search.jinja2') }}
 </body>
     {% block scripts %}
         {{ render_partial('partials/js/imports.jinja2') }}

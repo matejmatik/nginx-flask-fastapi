@@ -2,18 +2,14 @@ from datetime import datetime  # noqa
 from logging import getLogger  # noqa
 from os import getcwd as os_getcwd, path as os_path  # noqa
 
-from dash import Output, Input, Patch, State
-from flask import current_app
+from dash import Output, Input, Patch
 from dash.html import P
 from plotly.io import templates as plotly_templates  # noqa
 
 from .be_dash_components import BeHiddenDashThemeSwitch, BeGraph, BeStore, BeInterval
 from ...core import FlaskConfiguration
-from .elements import BeLoading, BeContainer, BeRow, BeCol
+from .elements import BeContainer, BeRow, BeCol
 from ...utils import CustomDash, format_dash_id  # noqa
-
-
-
 
 
 # -----------------------------------------------------------------------------
@@ -60,7 +56,7 @@ def create_dashboard_layout(app_id: str) -> BeContainer:
     create_dashboard_layout Creates the layout for the dashboard.
 
     """
-    
+
     return BeContainer(
         children=[
             BeInterval(_id=f"{app_id}-app-refresh", interval_in_seconds=600),
@@ -82,9 +78,9 @@ def create_dashboard_layout(app_id: str) -> BeContainer:
                                 _id=f"{app_id}-graph",
                                 with_loading=True,
                                 loading_in_fullscreen=False,
-                            ),                            
+                            ),
                         ],
-                        width=12,
+                        className="col-md-12",
                     ),
                 ]
             ),
@@ -104,8 +100,7 @@ def configure_dash_event_handlers(dash_app: object, app_id: str) -> None:
     """
     Configure the dash app event handlers.
     """
-    
-    
+
     dash_app.clientside_callback(
         """
         function() {
@@ -120,17 +115,15 @@ def configure_dash_event_handlers(dash_app: object, app_id: str) -> None:
             }
         }
         """,
-        Output(f"{app_id}-color-mode-switch", 'value'),
-        Input(f"{app_id}-app-refresh", 'n_intervals'),
+        Output(f"{app_id}-color-mode-switch", "value"),
+        Input(f"{app_id}-app-refresh", "n_intervals"),
     )
-    
+
     dash_app.callback(
         Output(f"{app_id}-data", "data"),
         Input(f"{app_id}-app-refresh", "n_intervals"),
     )(callback_init_data)
-        
-            
-    
+
     dash_app.callback(
         Output(f"{app_id}-graph", "figure"),
         Input(f"{app_id}-color-mode-switch", "value"),
@@ -143,10 +136,10 @@ def configure_dash_event_handlers(dash_app: object, app_id: str) -> None:
 # -----------------------------------------------------------------------------
 
 
-
 def callback_update_figure_template(switch_on: bool) -> BeGraph:
-
-    template = plotly_templates["plotly_dark"] if switch_on else plotly_templates["plotly"]
+    template = (
+        plotly_templates["plotly_dark"] if switch_on else plotly_templates["plotly"]
+    )
 
     patched_figure = Patch()
     patched_figure["layout"]["template"] = template
@@ -154,8 +147,6 @@ def callback_update_figure_template(switch_on: bool) -> BeGraph:
 
 
 def callback_init_data(n_intervals: int) -> dict:
-
     if n_intervals > 0:
         return {}
     return {}
-

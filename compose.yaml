@@ -8,7 +8,12 @@ services:
     extends:
       file: compose_partials/flask-dash-service.yaml
       service: flask-dash
-    command: ["gunicorn", "application.main:app", "--workers", "1", "--bind", "0.0.0.0:3000", "--log-level", "${FLASK_LOG_LEVEL?Variable not set}", "--reload"]
+    environment:
+      - SODO_SWAGGER_API_PROD_HOST=${SODO_SWAGGER_API_PROD_HOST}
+      - SODO_SWAGGER_API_TEST_HOST=${SODO_SWAGGER_API_TEST_HOST}
+      - SODO_SWAGGER_API_USER=${SODO_SWAGGER_API_USER}
+      - SODO_SWAGGER_API_PASSWORD=${SODO_SWAGGER_API_PASSWORD}
+    command: ["gunicorn", "application.main:app", "--workers", "1", "--bind", "0.0.0.0:8080", "--log-level", "${FLASK_LOG_LEVEL?Variable not set}", "--reload"]
     develop:
       watch:
         - action: sync

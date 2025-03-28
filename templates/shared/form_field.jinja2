@@ -1,0 +1,45 @@
+<div class="col-md-{{ fwidth }}">
+    <!-- if field is hidden type do not show label -->
+    {% if field.type != 'HiddenField' %}
+        {{ field.label }}
+    {% endif %}
+    {% if mode == 'add' or mode =='edit' %}
+        {% if ftype == 'fnumeric'%}
+            {{ field(class="form-control fnumeric", autocomplete="off", autofill="off")}}
+        {% else %}
+            {% if field.data == false and field.type != 'SelectField' and field.type != 'DecimalField' and field.type != 'BooleanField' %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="Ne" autocomplete="off" autofill="off">
+            {% elif field.data == true and field.type != 'SelectField' and field.type != 'DecimalField' and field.type != 'BooleanField' %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="Da" autocomplete="off" autofill="off">
+            {% else %}
+                {% if field.type == 'BooleanField' %}
+                    <select class="form-control" name="{{ field.name }}" autocomplete="off" autofill="off">
+                        <option value="1" {% if field.data == true %} selected {% endif %}>Da</option>
+                        <option value="0" {% if field.data == false %} selected {% endif %}>Ne</option>
+                    </select>
+                {% else %}
+                {{ field(class="form-control", autocomplete="off", autofill="off")}}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if ftype == 'fnumeric' %}
+            {{ field(class="form-control fnumeric", readonly="readonly", autocomplete="off", autofill="off", disabled=True) }}
+        {% else %}
+            {% if field.data == false and field.type != 'DecimalField' %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="Ne" autocomplete="off" autofill="off" readonly="readonly" disabled>
+            {% elif field.data == true and field.type != 'DecimalField' %}
+                <input type="text" class="form-control" name="{{ field.name }}" value="Da" autocomplete="off" autofill="off" readonly="readonly" disabled>
+            {% else %}
+                {{ field(class="form-control", readonly="readonly", autocomplete="off", autofill="off", disabled=True) }}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    {% if field.errors %}
+        <ul class=errors>
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div> 

@@ -21,3 +21,4 @@ services:
     volumes:
       - ../static:/project/application/static:ro
       - ../templates:/project/application/templates:ro
+      - ../config:/project/application/config:ro

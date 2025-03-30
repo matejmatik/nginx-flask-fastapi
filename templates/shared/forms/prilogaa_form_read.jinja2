@@ -1,0 +1,134 @@
+{% from "shared/macros/format_price.jinja2" import format_price %}
+{% from "shared/macros/format_date_ymd.jinja2" import format_date_ymd %}
+<h5 class="mb-4">Podatki o stranki in MT</h5>
+<div class="row mb-2">
+    <div class="col-md-1">
+        <label>ID</label>
+        <input type="text" class="form-control" value="{{ priloga_a['priloga_a_desc_id'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Št. priloge A</label>
+        <input type="text" class="form-control" value="{{ priloga_a['zaporedna_stevilka'] }}" required readonly>
+    </div>
+    <div class="col-md-1">
+        <label>Verzija</label>
+        <input type="text" class="form-control" value="{{ priloga_a['verzija'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+        <label>Datum izstavitve</label>
+        <input type="date" class="form-control" value="{{ priloga_a['datum_izstavitve'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Datum zapadlosti</label>
+        <input type="date" class="form-control" value="{{ priloga_a['datum_zapadlosti'] }}" required readonly>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-1">
+        <label>Št. stranke</label>
+        <input type="text" class="form-control" value="{{ priloga_a['placnik']['counterparty_number'] }}" required readonly>
+    </div>
+    <div class="col-md-5">
+        <label>Plačnik naziv (priloga A)</label>
+        <input type="text" class="form-control" value="{{ priloga_a['placnik_naziv'] }}" required readonly>
+    </div>
+    <div class="col-md-1">
+        <label>ID za DDV</label>
+        <input type="text" class="form-control" value="{{ priloga_a['placnik_davcna'] }}" required readonly>
+    </div>
+    <div class="col-md-5">
+        <label>Naslovnik naziv (priloga A)</label>
+        <input type="text" class="form-control" value="{{ priloga_a['naslovnik_naziv'] }}" required readonly>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-2">
+        <label>EIMM</label>
+        <input type="text" class="form-control" value="{{ priloga_a['enotni_identifikator_mm'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>GSRN MM</label>
+        <input type="text" class="form-control" value="{{ priloga_a['gsrnmm'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>GSRN MT</label>
+        <input type="text" class="form-control" value="{{ priloga_a['gsrnmt'] }}" required readonly>
+    </div>
+    <div class="col-md-6">
+        <label>Naziv MM</label>
+        <input type="text" class="form-control" value="{{ priloga_a['naziv_mm'] }}" required readonly>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-2">
+        <label>Vezalna shema</label>
+        <input type="text" class="form-control" value="{{ priloga_a['obracunska_vezalna_shema'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Vrsta tarife</label>
+        <input type="text" class="form-control" value="{{ priloga_a['vrsta_tarife_za_obracun'] }}" required readonly>
+    </div>
+    <div class="col-md-3">
+        <label>Odjemna skupina</label>
+        <input type="text" class="form-control" value="{{ priloga_a['odjemna_skupina_mm'] }}" required readonly>
+    </div>
+    <div class="col-md-3">
+        <label>Uporabniška skupina</label>
+        <input type="text" class="form-control" value="{{ priloga_a['uporabniska_skupina_mm'] }}" required readonly>
+    </div>
+</div>
+<hr class="mb-5 border-bottom border-2 border-secondary">
+<h5 class="mb-4">Drugo</h5>
+<div class="row mb-2">
+    <div class="col-md-2">
+        <label>Obdobje od</label>
+        <input type="date" class="form-control" value="{{ priloga_a['obdobje_od'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Obdobje do</label>
+        <input type="date" class="form-control" value="{{ priloga_a['obdobje_do'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Leto podatka</label>
+        <input type="text" class="form-control" value="{{ priloga_a['leto_podatka'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Mesec podatka</label>
+        <input type="text" class="form-control" value="{{ priloga_a['mesec_financne_realizacije'] }}" required readonly>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-2">
+        <label>Uvrstitev obračuna</label>
+        <input type="text" class="form-control" value="{{ priloga_a['uvrstitev_obracuna'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Izvor bremenitve</label>
+        <input type="text" class="form-control" value="{{ priloga_a['izvor_bremenitve'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Razlog obračuna</label>
+        <input type="text" class="form-control" value="{{ priloga_a['razlog_obracuna'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Potreben obračun</label>
+        <input type="text" class="form-control" value="{{ priloga_a['potreben_obracun_dobavitelja'] }}" required readonly>
+    </div>
+    <div class="col-md-2">
+        <label>Skupni račun</label>
+        <input type="text" class="form-control" value="{{ priloga_a['skupni_racun'] }}" required readonly>
+    </div>
+</div>
+{% if priloga_a['obvestila_podatki']|length > 0 %}
+<hr class="mb-5 border-bottom border-2 border-secondary">
+<h6 class="mb-4">Obvestila</h6>
+    {% for obvestilo in priloga_a['obvestila_podatki'] %}
+    <div class="row mb-2 mx-3">
+        <div class="alert alert-light p-3" role="alert">
+            {{ obvestilo['obvestilo'] }}
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}

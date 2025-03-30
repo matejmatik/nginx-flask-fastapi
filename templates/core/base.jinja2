@@ -1,8 +1,31 @@
-{% from "shared/macros/format_price.jinja2" import format_price %}
-{% from "shared/macros/form_field.jinja2" import form_field %} <!-- Might be deprecated -->
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<html data-bs-theme="dark" lang="sl">
 <head>
+    {% cache 60*60*24 %} <!-- Cache for 24 hours -->
+    <!-- jQuery Integration -->
+    <script 
+        src='{{ url_for("static", filename="js/external/jquery-3.7.1.min.js") }}'
+        type="text/javascript"
+    >
+    </script>
+    <!-- Bootstrap Integration -->
+    <script
+        src="{{ url_for('static', filename='js/external/bootstrap.bundle.min.js') }}"
+        type="text/javascript"
+    >
+    </script>
+    <!-- Bootstrap Dark Mode Integration -->
+    <script
+        src="{{ url_for('static', filename='js/dark_light_mode_switch.js') }}"
+        type="text/javascript"
+    >
+    </script>
+    {% endcache %}
+    <script 
+        src="{{ url_for('static', filename='js/external/datatables.min.js') }}"
+        type="text/javascript"
+    >
+    </script>
     {% block meta %}
         <meta charset="UTF-8">
         <meta name="description" content="BISOL Energija, Kilowatt Kate Insight">
@@ -11,25 +34,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock %}
     {% block styles %}
-        {{ render_partial('partials/css/imports.jinja2') }}
+        {% cache 60*60*24 %} <!-- Cache for 24 hours -->
+            {% include 'partials/css/imports.jinja2' %}
+            {% include 'partials/css/spinner.jinja2' %}
+        {% endcache %}
+    {% endblock %}
+    {% block extracss %}
     {% endblock %}
     <title>{% block title %} {% endblock %}</title>
 </head>
-<body>
-    {{ render_partial('partials/theme_switcher.jinja2') }}
-    {{ render_partial('partials/header.jinja2') }}
-    <div id="be-alerts">{{ render_partial('partials/alerts.jinja2') }}</div>
-    {{ render_partial('partials/footer.jinja2', version=version) }}
-    <main role="main" class="app_content pt-3 h-100">
+<body class="d-flex flex-column min-vh-100">
+    {% include 'partials/spinner.jinja2' %}
+    {% include 'partials/header.jinja2' %}
+    <div id="be-alerts">
+        {% include 'partials/alerts.jinja2' %}
+    </div>
+    {% include 'partials/footer.jinja2' %}
+    <main role="main" class="app_content pt-5 h-100 flex-grow-1" id="main-content">
+
         {% block app_content %}
         <!-- Content -->
         {% endblock %}
     </main>
-    {{ render_partial('partials/offcanvas.jinja2') }}
-    {{ render_partial('partials/bisol_search.jinja2') }}
+    {% if user.is_authenticated %}
+        {% include 'partials/offcanvas.jinja2' %}
+        {% include 'partials/bisol_search.jinja2' %}
+    {% endif %}
 </body>
     {% block scripts %}
-        {{ render_partial('partials/js/imports.jinja2') }}
+        {% include 'partials/js/spinner.jinja2' %}
+        {% include 'partials/js/imports.jinja2' %}
     {% endblock %}
     {% block extrajs %}
     {% endblock %}

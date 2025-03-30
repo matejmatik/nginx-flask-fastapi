@@ -1,0 +1,42 @@
+<script>
+window.addEventListener('load', () => {
+    const spinnerWrapper = document.querySelector('#spinner-wrapper');
+    const mainContent = document.querySelector('#main-content');
+
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+    const switchElement = document.querySelector('#color-mode-switch');
+    const logo = document.querySelector("#logo");
+    if (currentTheme === 'dark') {
+        logo.src = "{{ url_for('static', filename='img/BE_logo_dark.svg') }}";
+        if (switchElement) {
+            switchElement.checked = true;
+        }
+    }
+    else {
+        logo.src = "{{ url_for('static', filename='img/BE_logo_light.svg') }}";
+        if (switchElement) {
+            switchElement.checked = false;
+        }
+    }
+
+    if (spinnerWrapper && mainContent) {
+        // Fade out the spinner
+        spinnerWrapper.style.opacity = '0';
+        spinnerWrapper.style.transition = 'opacity 0.5s ease'; 
+
+        setTimeout(() => {
+
+            // Reveal the main content
+            mainContent.style.visibility = 'visible';
+            mainContent.style.opacity = '1'; // Set opacity to 1 to make it visible
+
+            // Hide spinner and reveal main content again
+            spinnerWrapper.style.pointerEvents = 'none';
+            spinnerWrapper.style.display = 'none';
+
+
+        }, 500); // Match this timeout with the spinner fade-out duration
+    }
+
+});
+</script>

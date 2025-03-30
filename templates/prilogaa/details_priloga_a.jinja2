@@ -1,0 +1,119 @@
+{% extends "core/base.jinja2" %} 
+{% block title %} Priloga A: {{ priloga_a['zaporedna_stevilka'] }} {% endblock %}
+{% block app_content %}
+<div class="container shadow-lg p-5 rounded">
+    <div class="d-flex flex-row py-3 text-left ">
+
+        <a href="{{ url_for('api.prilogaa_views.index') }}" class="hyperlink_file lead" title="Nazaj na seznam prilog A">
+            <span><i class="bi bi-arrow-return-left text-warning fs-3"></i></span>
+        </a>
+        <div class="d-flex align-items-center justify-content-start w-100">
+            <h3 class="mx-3">PA - Zap. številka: {{ priloga_a['zaporedna_stevilka'] }}</h3>
+        </div>
+        <br>
+        <div class="btn-group d-flex align-items-center" role="group" aria-label="gumbi">
+            <!-- Gumbi -->
+        </div> 
+    </div>
+    <div class="row mb-3">
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-desc" aria-expanded="false" aria-controls="pa-desc">
+                    <span class="fs-5">Splošni podatki</span>
+                </button>
+                </div>
+                <div id="pa-desc" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="col-md-12 order-md-1 p-3">
+                        {{ render_partial('shared/forms/prilogaa_form_read.jinja2', priloga_a=priloga_a) }}     
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-op" aria-expanded="false" aria-controls="pa-op">
+                        <span class="fs-5">Obračunski podatki</span>
+                    </button>
+                </div>
+                <div id="pa-op" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="col-md-12 order-md-1 p-3" hx-swap="innerHTML" id="priloga-obracunski-podatki">
+                            {{ render_partial('shared/forms/prilogaa_form_read_obracunski.jinja2', obracunski_podatki=priloga_a['obracunski_podatki'], table_name='tbl-obracunski') }}  
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            {% if priloga_a['informativni_izracun']|length > 0 %}
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-iniz" aria-expanded="false" aria-controls="pa-iniz">
+                        <span class="fs-5">Informativni izračun</span>
+                    </button>
+                </div>
+                <div id="pa-iniz" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="col-md-12 order-md-1 p-3" hx-swap="innerHTML" id="priloga-obracunski-informativni">
+                            {{ render_partial('shared/forms/prilogaa_form_read_obracunski.jinja2', obracunski_podatki=priloga_a['informativni_izracun'], table_name='tbl-inf-izr') }}  
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            {% endif %}
+            {% if priloga_a['ze_zaracunano']|length > 0 %}
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-zz" aria-expanded="false" aria-controls="pa-zz">
+                        <span class="fs-5">Obračunski podatki - Že zaračunano</span>
+                    </button>
+                </div>
+                <div id="pa-zz" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="col-md-12 order-md-1 p-3" hx-swap="innerHTML" id="priloga-obracunski-ze-zaracunano">
+                            {{ render_partial('shared/forms/prilogaa_form_read_obracunski.jinja2', obracunski_podatki=priloga_a['ze_zaracunano'], table_name='tbl-ze-zaracunano') }}  
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            {% endif %}
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-mp" aria-expanded="false" aria-controls="pa-mp">
+                        <span class="fs-5">Merski podatki</span>
+                    </button>
+                </div>
+                <div id="pa-mp" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="col-md-12 order-md-1 p-3" hx-swap="innerHTML" id="priloga-merski-podatki">
+                            {{ render_partial('shared/forms/prilogaa_form_read_merilni_podatki.jinja2', merilni_podatki=priloga_a['merilni_podatki'], table_name='tbl-merilni') }}  
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#pa-sum" aria-expanded="false" aria-controls="pa-sum">
+                        <span class="fs-5">Sumarne količine / povprečne dnevne porabe</span>
+                    </button>
+                </div>
+                <div id="pa-sum" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        <div class="row d-flex justify-content-between pb-2 mb-0">
+                            <div class="col-md-6 order-md-1 p-3" hx-swap="innerHTML" id="priloga-sumarne">
+                                <h5 class="mb-4">Sumarne količine</h5>
+                                {{ render_partial('shared/forms/prilogaa_form_read_sumarne.jinja2', merilni_podatki=priloga_a['sumarne_kolicine'], table_name='tbl-sumarne') }}  
+                            </div>
+                            <div class="col-md-6 order-md-1 p-3" hx-swap="innerHTML" id="priloga-povp-dnevne">
+                                <h5 class="mb-4">Povprečne dnevne porabe</h5>
+                                {{ render_partial('shared/forms/prilogaa_form_read_sumarne.jinja2', merilni_podatki=priloga_a['povprecne_dnevne_porabe'], table_name='tbl-povp-porb') }}  
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

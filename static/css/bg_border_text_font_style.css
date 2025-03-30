@@ -67,13 +67,22 @@
     width: 100% !important;
 }
 
-.be-small-badge-width {
-    width: 5rem !important;
+.extra-small-badge-width {
+    width: 3rem !important;
 }
 
-.be-badge-width {
+.small-badge-width {
+    width: 4rem !important;
+}
+
+.normal-badge-width {
+    width: 6rem !important;
+}
+
+.long-badge-width {
     width: 10rem !important;
 }
+
 
 .desno {
     text-align: right !important;

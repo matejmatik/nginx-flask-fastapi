@@ -5,7 +5,7 @@ from jinja_partials import register_extensions as jinja_partials_register_extens
 from .api import api_blueprints, register_api_error_handlers, register_dash_blueprints
 from .auth import User
 from .connections import initialize_client_connections
-from .core import FlaskConfiguration
+from .core import FlaskConfiguration, RedisCache
 from .utils import CustomRequest
 
 
@@ -40,7 +40,11 @@ def initialize_flask_application() -> Flask:
 
     # Load the configuration
     with app.app_context():
+        # Load the configuration from the config file
+        RedisCache.init_app(app)
         app.config.from_object(FlaskConfiguration)
+
+        # Add other configurations
         jinja_partials_register_extensions(app)
         initialize_client_connections(app)
         register_dash_blueprints(app)

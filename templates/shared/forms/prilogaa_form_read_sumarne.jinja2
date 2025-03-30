@@ -1,0 +1,28 @@
+{% from "shared/macros/format_price.jinja2" import format_price %}
+{% from "shared/macros/format_date_ymd.jinja2" import format_date_ymd %}
+{% if merilni_podatki %}
+<table class="table table-hover table-striped rounded box-shadow border" id="{{table_name}}" >
+    <thead>
+        <tr>
+            <th scope="col" class="col-6 text-left">Zaračunljiv el.</th>
+            <th scope="col" class="col-6 text-center">Količina</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for podatek in merilni_podatki %}
+        <tr>
+            <td>
+                {{ podatek['zaracunljiv_element'] }} 
+            </td>
+            <td class="text-center">
+                {{ podatek['kolicina'] }} 
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Ni podatkov za prikaz.
+</div>
+{% endif %}

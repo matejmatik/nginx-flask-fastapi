@@ -1,120 +1,84 @@
-/*!
-* Color mode toggler for Bootstrap's docs (https://getbootstrap.com/)
-* Copyright 2011-2024 The Bootstrap Authors
-* Licensed under the Creative Commons Attribution 3.0 Unported License.
-*/
-
 (() => {
-    'use strict'
-    
-    const getStoredTheme = () => localStorage.getItem('theme')
-    const setStoredTheme = theme => localStorage.setItem('theme', theme)
-    
+    'use strict';
+
+    const getStoredTheme = () => localStorage.getItem('theme');
+    const setStoredTheme = theme => localStorage.setItem('theme', theme);
+
     const getPreferredTheme = () => {
-        const storedTheme = getStoredTheme()
+        const storedTheme = getStoredTheme();
         if (storedTheme) {
-        return storedTheme
+            return storedTheme;
         }
-    
-        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    
-    const setTheme = theme => {
+
+    const setTheme = (theme) => {
         if (theme === 'auto') {
-        document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'))
+            document.documentElement.setAttribute('data-bs-theme', (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
         } else {
-        document.documentElement.setAttribute('data-bs-theme', theme)
+            document.documentElement.setAttribute('data-bs-theme', theme);
         }
 
-        
-
-        // Update the logo based on the theme
+        const currentTheme = document.documentElement.getAttribute('data-bs-theme');
         const logo = document.querySelector("#logo");
-        const switchElement = document.querySelector('#color-mode-switch');
-        if (theme === 'dark') {
-            logo.src = "../static/img/BE_logo_dark.svg";  // Dark logo
-            if (switchElement) {
-                switchElement.checked = true;
-            };
+        if (currentTheme === 'dark' && logo) {
+            logo.src = "../static/img/BE_logo_dark.svg";
+        } else if (logo) {
+            logo.src = "../static/img/BE_logo_light.svg";
         }
-        else if (theme === 'auto') {
-            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                logo.src = "../static/img/BE_logo_dark.svg";  // Dark logo
-                if (switchElement) {
-                    switchElement.checked = true;
-                };
-            } else {
-                logo.src = "../static/img/BE_logo_light.svg"; // Light logo
-                if (switchElement) {
-                    switchElement.checked = false;
-                };
-            }
-        } else {
-            logo.src = "../static/img/BE_logo_light.svg"; // Light logo
-            if (switchElement) {
-                switchElement.checked = false;
-            };
+    }
+
+    setTheme(getPreferredTheme());
+
+    const showActiveTheme = (theme, focus = false) => {
+        const themeSwitcher = document.querySelector('#bd-theme');
+
+        if (!themeSwitcher) {
+            return;
         }
 
-    }
-    
-    setTheme(getPreferredTheme())
-    
-    const showActiveTheme = (theme, focus = false) => {
-        const themeSwitcher = document.querySelector('#bd-theme')
-    
-        if (!themeSwitcher) {
-        return
-        }
-    
-        const themeSwitcherText = document.querySelector('#bd-theme-text')
-        const activeThemeIcon = document.querySelector('.theme-icon-active use')
-        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`)
-        const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href')
-    
+        const themeSwitcherText = document.querySelector('#bd-theme-text');
+        const activeThemeIcon = document.querySelector('.theme-icon-active use');
+        const btnToActive = document.querySelector(`[data-bs-theme-value="${theme}"]`);
+        const svgOfActiveBtn = btnToActive.querySelector('svg use').getAttribute('href');
+
         document.querySelectorAll('[data-bs-theme-value]').forEach(element => {
-        element.classList.remove('active')
-        element.setAttribute('aria-pressed', 'false')
-        })
-    
-        btnToActive.classList.add('active')
-        btnToActive.setAttribute('aria-pressed', 'true')
-        activeThemeIcon.setAttribute('href', svgOfActiveBtn)
-        const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`
-        themeSwitcher.setAttribute('aria-label', themeSwitcherLabel)
-    
+            element.classList.remove('active');
+            element.setAttribute('aria-pressed', 'false');
+        });
+
+        btnToActive.classList.add('active');
+        btnToActive.setAttribute('aria-pressed', 'true');
+        activeThemeIcon.setAttribute('href', svgOfActiveBtn);
+        const themeSwitcherLabel = `${themeSwitcherText.textContent} (${btnToActive.dataset.bsThemeValue})`;
+        themeSwitcher.setAttribute('aria-label', themeSwitcherLabel);
+
         if (focus) {
-        themeSwitcher.focus()
+            themeSwitcher.focus();
         }
     }
-    
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const storedTheme = getStoredTheme()
+        const storedTheme = getStoredTheme();
         if (storedTheme !== 'light' && storedTheme !== 'dark') {
-        setTheme(getPreferredTheme())
+            setTheme(getPreferredTheme());
         }
-    })
-    
+    });
+
     window.addEventListener('DOMContentLoaded', () => {
-        showActiveTheme(getPreferredTheme())
-        const currentTheme = getPreferredTheme();
-        const switchElement = document.querySelector('#color-mode-switch');
-        if (currentTheme === 'dark' && switchElement) {
-            switchElement.checked = true;
-        }
-        else if (switchElement) {
-            switchElement.checked = false;
-        }
+        showActiveTheme(getPreferredTheme());
 
         document.querySelectorAll('[data-bs-theme-value]')
-        .forEach(toggle => {
-            toggle.addEventListener('click', () => {
-            const theme = toggle.getAttribute('data-bs-theme-value')
-            setStoredTheme(theme)
-            setTheme(theme)
-            showActiveTheme(theme, true)
-            })
-        })
-    })
-    })();
+            .forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const theme = toggle.getAttribute('data-bs-theme-value');
+                    setStoredTheme(theme);
+                    setTheme(theme);
+                    showActiveTheme(theme, true);
+                });
+            });
+        
+    });
 
+})();

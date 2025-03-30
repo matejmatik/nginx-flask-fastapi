@@ -1,0 +1,73 @@
+{% from "shared/macros/format_price.jinja2" import format_price %}
+{% from "shared/macros/format_date_ymd.jinja2" import format_date_ymd %}
+{% if obracunski_podatki %}
+<table class="table table-hover table-striped rounded box-shadow border" id="{{table_name}}" >
+    <thead>
+        <tr>
+            <th scope="col" class="col-3 text-left">Zaračunljiv el.</th>
+            <th scope="col" class="col-1 text-left">Produkt</th>
+            <th scope="col" class="col-1 text-center">Obdobje od</th>
+            <th scope="col" class="col-1 text-center">Obdobje do</th>
+            <th scope="col" class="col-1 text-center">Količina</th>
+            <th scope="col" class="col-0-5 text-center">EM</th>
+            <th scope="col" class="col-0-5 text-center">Fex</th>
+            <th scope="col" class="col-1 text-right">Cena (EUR)</th>
+            <th scope="col" class="col-0-5 text-center">DDV</th>
+            <th scope="col" class="col-1-5 text-right">Neto znesek (EUR)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for podatek in obracunski_podatki %}
+        <tr>
+            <td>
+                {{ podatek['zaracunljiv_element'] }} 
+            </td>
+            <td>
+                {{ podatek['produkt'] }} 
+            </td>
+            <td class="text-center">
+                {{ format_date_ymd(podatek['obdobje_od'], with_time=false, spliter='T') }} 
+            </td>
+            <td class="text-center">
+                {{ format_date_ymd(podatek['obdobje_do'], with_time=false, spliter='T')  }} 
+            </td>
+            <td class="text-center" >
+                {% if podatek['enota_mere'].upper() == 'KW' %}
+                {{ format_price(price=podatek['kolicina'], decimal_places=1) }} 
+                {% else %}
+                {{ format_price(price=podatek['kolicina'], decimal_places=0) }}
+                {% endif %}
+            </td>
+            <td class="text-center" >
+                {{ podatek['enota_mere'] }} 
+            </td>
+            <td class="text-center" >
+                {% if podatek['fex'] is none %}
+                <!-- nothing -->
+                {% else %}
+                {{ format_price(price=podatek['fex'] , decimal_places=2) }}
+                {% endif %}
+            </td>
+            <td class="text-right" >
+                {{ format_price(price=podatek['cena'] , decimal_places=5) }} 
+            </td>
+
+            <td class="text-center" >
+                {{ format_price(price=podatek['stopnja_ddv'] * 100 , decimal_places=2) }}%
+            </td>
+            <td class="text-right" >
+                {{ format_price(price=podatek['znesek'], decimal_places=2) }} EUR
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tr>
+        <td colspan="9" class="text-right font-bold">Skupaj: </td>
+        <td class="text-right font-bold">{{ format_price(price=(obracunski_podatki|sum(attribute='znesek')), decimal_places=2) }} EUR</td>
+    </tr>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Ni podatkov za prikaz.
+</div>
+{% endif %}

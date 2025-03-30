@@ -1,0 +1,12 @@
+<style>
+    #spinner-wrapper {
+        transition: opacity 1s ease;
+        opacity: 1;
+        pointer-events: auto; 
+    }
+    #main-content {
+        visibility: hidden; /* Hide main content by default, without affecting layout */
+        opacity: 0; /* Ensure the content is invisible */
+        transition: opacity 1s ease, visibility 0.25s ease; /* Add smooth transition */
+    }
+</style>

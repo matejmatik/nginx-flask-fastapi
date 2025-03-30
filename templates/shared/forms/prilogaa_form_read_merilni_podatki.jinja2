@@ -1,0 +1,61 @@
+{% from "shared/macros/format_price.jinja2" import format_price %}
+{% from "shared/macros/format_date_ymd.jinja2" import format_date_ymd %}
+{% if merilni_podatki %}
+<table class="table table-hover table-striped rounded box-shadow border" id="{{table_name}}" >
+    <thead>
+        <tr>
+            <th scope="col" class="col-1 text-left">Št. števca</th>
+            <th scope="col" class="col-2 text-left">Zaračunljiv el.</th>
+            <th scope="col" class="col-1-5 text-left">Pridobitev podatkov</th>
+            <th scope="col" class="col-1 text-left">Korekcija količin</th>
+            <th scope="col" class="col-0-5 text-center">Konst.</th>
+            <th scope="col" class="col-1 text-center">Količina</th>
+            <th scope="col" class="col-1 text-right">Staro stanje</th>
+            <th scope="col" class="col-1 text-right">Staro - datum</th>
+            <th scope="col" class="col-1 text-right">Novo stanje</th>
+            <th scope="col" class="col-1 text-right">Novo - datum</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for podatek in merilni_podatki %}
+        <tr>
+            <td>
+                {{ podatek['stevilka_stevca'] }} 
+            </td>
+            <td>
+                {{ podatek['zaracunljiv_element'] }} 
+            </td>
+            <td>
+                {{ podatek['nacin_pridobitve_stanja'] }} 
+            </td>
+            <td>
+                {{ podatek['korekcija_kolicin'] }} 
+            </td>
+            <td class="text-center">
+                {{ podatek['konstanta_stevca'] }} 
+            </td>
+            <td class="text-center">
+                {{ podatek['kolicina'] }} 
+            </td>
+
+            <td class="text-right">
+                {{ podatek['stanje_staro_odbirek'] }} 
+            </td>
+            <td class="text-right">
+                {{ format_date_ymd(podatek['stanje_staro_datum'], with_time=false, spliter='T')  }} 
+            </td>
+            <td class="text-right" >
+                {{ podatek['stanje_novo_odbirek'] }} 
+            </td>
+            <td class="text-right" >
+                {{ format_date_ymd(podatek['stanje_novo_datum'], with_time=false, spliter='T')  }} 
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+    Ni podatkov za prikaz.
+</div>
+{% endif %}

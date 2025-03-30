@@ -1,0 +1,6 @@
+{% set prilogaa_info_badge_dict = {
+    'NI RELEVANTNA PA ': 'success',
+    'NE IZDAMO RAC. PA': 'info',
+    'RAC. SE NI IZDAN ': 'warning',
+} %}
+<span class="badge rounded-pill p-2 normal-badge-width text-bg-{{ prilogaa_info_badge_dict.get(badge_info, 'success') }}">{{ badge_info }}</span>

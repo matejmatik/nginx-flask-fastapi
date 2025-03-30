@@ -1,0 +1,5 @@
+{% set prilogaa_version_dict = {
+    '2.6': 'primary',
+    '2.7': 'success',
+} %}
+<span class="badge rounded-pill p-2 extra-small-badge-width text-bg-{{ prilogaa_version_dict.get(prilogaa_version, 'info') }}">{{ prilogaa_version }}</span>

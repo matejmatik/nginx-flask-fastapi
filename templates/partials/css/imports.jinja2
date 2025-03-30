@@ -39,5 +39,9 @@
     rel="stylesheet" 
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
 />
-<!-- DataTables as external CSS later will be downloaded -->
-<link href="https://cdn.datatables.net/v/bs5/jq-3.7.0/jszip-3.10.1/dt-2.2.2/b-3.2.2/b-html5-3.2.2/b-print-3.2.2/date-1.5.5/r-3.0.4/sp-2.3.3/datatables.min.css" rel="stylesheet" integrity="sha384-NIfciDhPJ7rtnk2OX0D6yezhvAWH2fhR9wNaE45yMjWWCDOScpDxCFjnrebB483P" crossorigin="anonymous">
+<!-- DataTable CSS -->
+<link
+    rel="stylesheet" 
+    type="text/css" 
+    href="{{ url_for('static', filename='css/external/datatables.min.css') }}"
+/>

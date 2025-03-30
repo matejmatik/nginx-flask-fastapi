@@ -1,13 +1,17 @@
-html,
-body {
-    height: 100%;
-    font-size: 12px;
-    font-family: 'Roboto', sans-serif !important;
+/* Initially hide content until theme is set */
+html {
+    display: none;
 }
 
+/* Once JavaScript sets the theme, display the content */
+html[data-bs-theme] {
+    display: block;
+}
+
+html,
 body {
-    display: flex;
-    flex-direction: column;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif !important;
 }
 
 header,

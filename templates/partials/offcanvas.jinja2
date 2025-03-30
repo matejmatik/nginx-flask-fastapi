@@ -18,7 +18,95 @@
                 </button>
                 <div class="collapse show" id="pregled-be">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
-                        <li class="my-1"><a class="seznam_app" href="{{ url_for('default_dash_app') }}">Privzeta template aplikacija</a></li>
+                        <li class="my-1"><a class="seznam_app" href="#">Portfelj BE</a></li>
+                        <li class="my-1"><a class="seznam_app" href="#">Pozicija BE</a></li>
+                        <li class="my-1"><a class="seznam_app" href="#">Pregled po GSRN MT</a></li>
+                        <li class="my-1"><a class="seznam_app" href="#">BSP in Imbalance</a></li>
+                        <li class="my-1"><a class="seznam_app" href="#">Spremljanje MM z baterijami</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item my-2"> 
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#prodaja-be" aria-expanded="true">
+                    <i class="bi bi-graph-up-arrow h5"></i><span class="mx-2 lead meni">Prodaja</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="prodaja-be">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                        <li class="my-1"><a class="seznam_app" href="#">Cenik produktov</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item my-2">
+                <button class="btn btn-toggle rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#upravljanje-be" aria-expanded="true">
+                    <i class="bi bi-building-gear h5"></i><span class="mx-2 lead meni">Upravljanje BE (CMS)</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="upravljanje-be" style="">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                    <li class="my-1"><a class="seznam_app" href="#">Povpraševanja</a></li>
+                    <li class="my-1"><a class="seznam_app" href="#">Stranke</a></li>
+                    <li class="my-1">
+                    <a class="seznam_app" href="#">Pogodbe</a>
+                    <div class="collapse show" id="pogodbe-be">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                            {# <li class="my-1"><a class="seznam_app" href="{{url_for('edc.dashboard', type_of_contract='all')}}">Skupaj</a></li> #}
+                            <li class="my-1"><a class="seznam_app" href="#">Gospodinjstva/MPO</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">B2B</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">Samooskrbe</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">Statistika pogodb</a></li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li class="my-1"><a class="seznam_app" href="#">Vrednotenje profila</a></li>
+                    <li class="my-1"><a class="seznam_app" href="#">CEEPS</a></li>
+                    <li class="my-1"><a class="seznam_app" href="#">BE Poročila</a></li>
+                </ul>
+                </div>
+            </li>
+            <li class="nav-item my-2">
+                <button class="btn btn-toggle rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#racunovodstvo" aria-expanded="true">
+                    <i class="bi bi-cash-stack h5"></i><span class="mx-2 lead meni">Računovodstvo</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="racunovodstvo" style="">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                    <li class="my-1">
+                    <a class="seznam_app" href="#">Računi</a>
+                    <div class="collapse show" id="invoices-be">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                            <li class="my-1"><a class="seznam_app" href="#">V procesu</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">SDD (trajniki)</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">V izterjavi</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">Ugodnosti in dobropisi</a></li>
+                            <li class="my-1"><a class="seznam_app" href="#">Izbrisani in zavrnjeni računi</a></li>
+                        </ul>
+                    </div>
+                    </li>
+                    <li class="my-1"><a class="seznam_app" href="{{ url_for('api.prilogaa_views.index') }}">Priloge A</a></li>
+                </ul>
+                </div>
+            </li>
+            <li class="nav-item my-2">
+                <button class="btn btn-toggle rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#analytics-be" aria-expanded="true">
+                    <i class="bi bi-clipboard2-data h5"></i><span class="mx-2 lead meni">Analitika</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="analytics-be" style="">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                    <li class="my-1"><a class="seznam_app" href="#">Dinamične cene</a></li>
+                    <li class="my-1"><a class="seznam_app" href="#">Ročni vnos napovedi po MT</a></li>
+                </ul>
+                </div>
+            </li>
+            <li class="nav-item my-2">
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 d-flex align-items-center">
+                    <i class="bi bi-journal-richtext h5"></i><span class="ms-2 lead meni"><a href="#">Baza znanja</a></span>
+                </button>
+            </li>
+            <li class="nav-item my-2"> 
+                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 d-flex align-items-center" data-bs-toggle="collapse" data-bs-target="#razvoj-be" aria-expanded="true">
+                    <i class="bi bi-file-earmark-code h5"></i><span class="mx-2 lead meni">Razvoj</span><i class="bi bi-chevron-down"></i>
+                </button>
+                <div class="collapse show" id="razvoj-be">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small px-5">
+                        <li class="my-1"><a class="seznam_app" href="{{ url_for('default_dash_app') }}">Template Dash</a></li>
                     </ul>
                 </div>
             </li>

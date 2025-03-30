@@ -11,4 +11,3 @@ api_bp = Blueprint("api", __name__)
 api_bp.register_blueprint(home_blueprints, url_prefix="/")
 api_bp.register_blueprint(test_blueprints, url_prefix="/test")
 api_bp.register_blueprint(prilogaa_blueprints, url_prefix="/prilogaa")
-

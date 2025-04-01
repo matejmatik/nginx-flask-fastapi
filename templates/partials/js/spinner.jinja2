@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
             switchElement.checked = false;
         }
     }
-
+    
     if (spinnerWrapper && mainContent) {
         // Fade out the spinner
         spinnerWrapper.style.opacity = '0';
@@ -28,8 +28,7 @@ window.addEventListener('load', () => {
 
             // Reveal the main content
             mainContent.style.visibility = 'visible';
-            mainContent.style.opacity = '1'; // Set opacity to 1 to make it visible
-
+            mainContent.style.opacity = '1'; 
             // Hide spinner and reveal main content again
             spinnerWrapper.style.pointerEvents = 'none';
             spinnerWrapper.style.display = 'none';

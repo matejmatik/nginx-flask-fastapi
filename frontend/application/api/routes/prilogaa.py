@@ -63,18 +63,31 @@ def index():
     try:
         return render_template(
             "/prilogaa/index.jinja2",
-            priloge_a_list=__get_priloge_a_table_data(),
         )
     except Exception as e:
         flash(f"Napaka pri nalaganju strani: {str(e)}", "danger")
         return render_template(
             "/prilogaa/index.jinja2",
-            priloge_a_list=[],
         )
+
+
+@bp.route("/priloge_a", methods=["GET"])
+@login_required
+@cache.cached(timeout=600)
+def priloge_a_table_data():
+    return render_template(
+        "shared/tables/prilogaa_table.jinja2",
+        priloge_a_list=__get_priloge_a_table_data(),
+        table_id="tbl-priloge-a",
+        scrollY="55vh",
+        show_search=True,
+        show_footer=True,
+    )
 
 
 @bp.route("/podrobno/<path:priloga_a_desc_id>", methods=["GET"])
 @login_required
+@cache.memoize(timeout=600)
 def prilogaa_read(priloga_a_desc_id: int) -> object:
     return render_template(
         "prilogaa/details_priloga_a.jinja2",

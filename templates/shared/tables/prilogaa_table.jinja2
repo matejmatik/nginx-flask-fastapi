@@ -54,17 +54,17 @@
 </tbody>
 <tfoot>
     <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>   
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>sif-pa</th>
+        <th>verzija</th>
+        <th>placnik</th>
+        <th>naziv-mm</th>
+        <th>gsrnmt</th>
+        <th>eimm</th>
+        <th>od</th>
+        <th>do</th>
+        <th>razlog</th>
+        <th>izstavljeno</th>
+        <th>info</th>
     </tr>
 </tfoot>
 </table>
@@ -119,7 +119,7 @@ $(document).ready(function() {
                     var title = column.footer().textContent;
 
                     // Create input element and add event listener
-                    $('<input type="text" placeholder="Išči ..." />')
+                    $('<input type="text" placeholder="Išči ..." id="isci-' + title + '"/>')
                         .appendTo($(column.footer()).empty())
                         .on('keyup change clear', function () {
                             if (column.search() !== this.value) {

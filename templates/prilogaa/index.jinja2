@@ -8,12 +8,16 @@
             <!-- Gumbi -->
         </div>  
     </div>
-    <div class="my-3 p-4 rounded box-shadow border table-responsive" id="priloge-a-table">
-        {{ render_partial('shared/tables/prilogaa_table.jinja2', 
-        table_id='tbl-priloge-a', 
-        priloge_a_list=priloge_a_list,
-        scrollY='55vh', show_search=true, show_footer=true
-        ) }}
+    {{ render_partial('partials/spinner_data_loading.jinja2') }}
+    <div 
+        class="my-3 p-4 rounded box-shadow border table-responsive" 
+        id="priloge-a-table"
+        hx-get="{{ url_for('api.prilogaa_views.priloge_a_table_data') }}"
+        hx-trigger="load"
+        hx-swap="innerHTML"
+        hx-target="#priloge-a-table"
+        hx-indicator="#spinner-table" 
+    >
     </div>
 </div>
 {% endblock %}

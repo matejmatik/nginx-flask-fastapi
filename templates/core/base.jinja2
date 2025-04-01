@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html data-bs-theme="dark" lang="sl">
 <head>
-    {% cache 60*60*24 %} <!-- Cache for 24 hours -->
-    <!-- jQuery Integration -->
-    <script 
-        src='{{ url_for("static", filename="js/external/jquery-3.7.1.min.js") }}'
-        type="text/javascript"
-    >
-    </script>
-    <!-- Bootstrap Integration -->
-    <script
-        src="{{ url_for('static', filename='js/external/bootstrap.bundle.min.js') }}"
-        type="text/javascript"
-    >
-    </script>
-    <!-- Bootstrap Dark Mode Integration -->
-    <script
-        src="{{ url_for('static', filename='js/dark_light_mode_switch.js') }}"
-        type="text/javascript"
-    >
-    </script>
+    {% cache 60*60*24 %}
+        <!-- jQuery Integration -->
+        <script 
+            src='{{ url_for("static", filename="js/external/jquery-3.7.1.min.js") }}'
+            type="text/javascript"
+        >
+        </script>
+        <!-- Bootstrap Integration -->
+        <script
+            src="{{ url_for('static', filename='js/external/bootstrap.bundle.min.js') }}"
+            type="text/javascript"
+        >
+        </script>
+        <!-- Bootstrap Dark Mode Integration -->
+        <script
+            src="{{ url_for('static', filename='js/dark_light_mode_switch.js') }}"
+            type="text/javascript"
+        >
+        </script>
     {% endcache %}
     <script 
         src="{{ url_for('static', filename='js/external/datatables.min.js') }}"
@@ -34,7 +34,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     {% endblock %}
     {% block styles %}
-        {% cache 60*60*24 %} <!-- Cache for 24 hours -->
+        {% cache 60*60*24 %}
             {% include 'partials/css/imports.jinja2' %}
             {% include 'partials/css/spinner.jinja2' %}
         {% endcache %}
@@ -51,7 +51,6 @@
     </div>
     {% include 'partials/footer.jinja2' %}
     <main role="main" class="app_content pt-5 h-100 flex-grow-1" id="main-content">
-
         {% block app_content %}
         <!-- Content -->
         {% endblock %}
@@ -62,8 +61,10 @@
     {% endif %}
 </body>
     {% block scripts %}
-        {% include 'partials/js/spinner.jinja2' %}
-        {% include 'partials/js/imports.jinja2' %}
+        {% cache 60*60*24 %}
+            {% include 'partials/js/spinner.jinja2' %}
+            {% include 'partials/js/imports.jinja2' %}
+        {% endcache %}
     {% endblock %}
     {% block extrajs %}
     {% endblock %}

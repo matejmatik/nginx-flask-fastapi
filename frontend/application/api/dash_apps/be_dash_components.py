@@ -31,7 +31,7 @@ def BeLoading(
 ) -> Loading:
     return Loading(
         children=children,
-        type="default",
+        type="dot",
         fullscreen=loading_in_fullscreen,
         color="#F15922",
     )

@@ -1,0 +1,39 @@
+<!-- Script to show a loading spinner while data is being fetched -->
+<div 
+    class="d-flex justify-content-center align-items-center min-vh-100 w-100"
+    id="spinner-table"
+    style="display: none; z-index: 9999; position: absolute; top: 0; left: 0;"
+>
+    <div class="spinner-grow bisol-color" style="width: 3rem; height: 3rem; border-width: 1.25rem;" role="status">
+    </div>
+</div>
+<script>
+    // Show the spinner when a request starts and reset after it completes
+    document.body.addEventListener('htmx:beforeRequest', function(event) {
+        // Show the spinner and hide the table
+        const spinnerWrapper = document.querySelector('#spinner-table');
+        const mainContent = document.querySelector('#priloge-a-table');
+        if (spinnerWrapper) {
+            mainContent.style.opacity = '0';
+            spinnerWrapper.style.display = 'flex';
+        }
+    });
+
+    // Hide the spinner and show the table after content is swapped
+    document.body.addEventListener('htmx:afterSwap', function(event) {
+        // Hide the spinner and show the table
+        const spinnerWrapper = document.querySelector('#spinner-table');
+        const mainContent = document.querySelector('#priloge-a-table');
+
+        if (spinnerWrapper) {
+            spinnerWrapper.style.opacity = '0';
+            spinnerWrapper.style.transition = 'opacity 2s ease';
+            setTimeout(() => {
+                spinnerWrapper.style.pointerEvents = 'none';
+                spinnerWrapper.style.display = 'none';
+                mainContent.style.opacity = '1';
+            }, 2000);
+            mainContent.style.display = 'block';
+        }
+    });
+</script>
